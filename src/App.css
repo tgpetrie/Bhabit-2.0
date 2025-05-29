@@ -1,0 +1,1920 @@
+/* BHABIT Design System - Enhanced Visual Hierarchy & Effects */
+
+/* CSS Custom Properties for consistent theming */
+:root {
+  --primary-orange: #FF6B00;
+  --primary-blue: #00BFFF;
+  --primary-pink: #FF69B4;
+  --accent-purple: #8A2BE2;
+  --dark-bg: #000;
+  --mid-bg: #111;
+  --light-bg: #1a1a1a;
+  --glass-bg: rgba(0, 0, 0, 0.8);
+  --glass-border: rgba(0, 191, 255, 0.3);
+  --text-light: #ccc;
+  --text-white: #fff;
+  --text-muted: #888;
+  --shadow-glow: 0 0 30px;
+  --shadow-intense: 0 0 50px;
+  --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-quick: all 0.3s ease;
+  --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --border-radius: 20px;
+  --border-radius-small: 10px;
+  --section-spacing: 6rem; /* Reduced from 12rem */
+  --hero-background-image: url('./images/bhabit-coin-bg.png'); /* Corrected to .png */
+  --hero-background-opacity: 0.08; /* Adjust for "barely visible" effect */
+}
+
+/* Base styles with improved typography */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Unbounded', 'Inter', -apple-system, sans-serif;
+  background: var(--dark-bg);
+  color: var(--text-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  text-transform: uppercase; /* Make all text uppercase */
+}
+
+.App {
+  /* ... existing .App styles ... */
+  /* text-transform: uppercase; */ /* Alternatively, apply here if body is too broad */
+}
+
+/* Enhanced typography hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 1.5rem 0;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem); /* Reduced from 6vw, 5rem */
+  font-weight: 900;
+  color: var(--text-white);
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem); /* Reduced from 5vw, 4rem */
+  color: var(--primary-blue);
+  position: relative;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+h2::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-orange), var(--primary-pink));
+  border-radius: 2px;
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-pink), var(--primary-blue));
+  border-radius: 2px;
+}
+
+h3 {
+  color: var(--primary-blue);
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem); /* Reduced from 3.5vw, 2.2rem */
+  font-weight: 600;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+h3::before {
+  content: "▶";
+  color: var(--primary-pink);
+  margin-right: 0.5rem;
+  font-size: 0.8em;
+  animation: pulse-arrow 2s infinite;
+}
+
+h4 {
+  color: var(--primary-pink);
+  font-size: clamp(1.3rem, 2.8vw, 1.8rem);
+  font-weight: 600;
+  margin: 2rem 0 1rem 0;
+}
+
+p {
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem); /* Reduced from 2.2vw, 1.3rem */
+  margin-bottom: 1.5rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.lead-text {
+  font-size: clamp(1.1rem, 2vw, 1.3rem); /* Reduced from 2.5vw, 1.6rem */
+  color: var(--text-white);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Enhanced navigation with better hierarchy */
+.nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(25px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition-quick);
+}
+
+.nav-container.scrolled {
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(30px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(0, 191, 255, 0.3);
+}
+
+.nav-link {
+  color: var(--primary-blue);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 0.8rem 1.5rem;
+  margin: 0 0.3rem;
+  border-radius: var(--border-radius-small);
+  transition: var(--transition-bounce);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 191, 255, 0.2), transparent);
+  transition: var(--transition-quick);
+}
+
+.nav-link:hover::before {
+  left: 100%;
+}
+
+.nav-link:hover {
+  color: var(--text-white);
+  text-shadow: var(--shadow-glow) var(--primary-blue);
+  transform: translateY(-3px) scale(1.05);
+  border-color: var(--primary-blue);
+  background: rgba(0, 191, 255, 0.1);
+}
+
+.nav-link.active {
+  color: var(--primary-pink);
+  background: rgba(255, 105, 180, 0.15);
+  text-shadow: var(--shadow-glow) var(--primary-pink);
+  border-color: var(--primary-pink);
+  transform: scale(1.1);
+}
+
+/* Enhanced CTA buttons */
+.cta-button, .cta-primary, .cta-secondary {
+  display: inline-block;
+  padding: 1.2rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  transition: var(--transition-bounce);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+  letter-spacing: 1px;
+  margin: 0.5rem;
+}
+
+.cta-primary {
+  background: linear-gradient(135deg, var(--primary-orange), var(--primary-pink));
+  color: var(--text-white);
+  box-shadow: 
+    0 8px 25px rgba(255, 107, 0, 0.4),
+    0 0 40px rgba(255, 105, 180, 0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cta-primary:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    0 15px 35px rgba(255, 107, 0, 0.6),
+    0 0 60px rgba(255, 105, 180, 0.5);
+  filter: brightness(1.1);
+}
+
+.cta-secondary {
+  background: transparent;
+  color: var(--primary-blue);
+  border: 2px solid var(--primary-blue);
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+}
+
+.cta-secondary:hover {
+  background: var(--primary-blue);
+  color: var(--dark-bg);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 191, 255, 0.5);
+}
+
+.cta-group {
+  display: flex;
+  gap: 1.5rem; /* Spacing between buttons */
+  justify-content: center; /* Center the group if needed */
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+}
+
+/* If you want buttons in a group to take equal width within the group */
+.cta-group .cta-primary,
+.cta-group .cta-secondary {
+  flex-grow: 1; /* Allows buttons to grow and fill available space if desired */
+  flex-basis: 0; /* Distribute space evenly */
+}
+
+/* Styling for social links to ensure separation */
+.social-links {
+  display: flex;
+  align-items: center; /* Vertically align items if they have different heights */
+  gap: 1.5rem; /* Adjust this for more or less space between links. Same as .cta-group for consistency. */
+  flex-wrap: wrap; /* Allow links to wrap on smaller screens */
+  /* If these links are within a specific section that needs centering, uncomment the line below: */
+  /* justify-content: center; */
+  margin-top: 0.5rem; /* Optional: adds some space above the group of social links */
+}
+
+/* Enhanced layout system with better separation */
+.content-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+section {
+  padding: var(--section-spacing) 0;
+  position: relative;
+  scroll-margin-top: 120px;
+}
+
+/* Section separators with visual effects */
+section:not(.hero-section):not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--primary-blue), 
+    var(--primary-pink), 
+    var(--primary-blue),
+    transparent);
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+}
+
+section:nth-child(even) {
+  background: linear-gradient(135deg, 
+    rgba(17, 17, 17, 0.3) 0%, 
+    rgba(26, 26, 26, 0.5) 100%);
+}
+
+section:nth-child(odd):not(.hero-section) {
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.8) 0%, 
+    rgba(17, 17, 17, 0.9) 100%);
+}
+
+/* Hero Section - Premium BHABIT logo with enhanced effects */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 105, 180, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(255, 107, 0, 0.05) 0%, transparent 60%),
+    linear-gradient(135deg, var(--dark-bg) 0%, var(--mid-bg) 100%);
+  position: relative;
+  padding-top: 120px;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: var(--hero-background-image);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: var(--hero-background-opacity);
+  z-index: 0; /* Behind the hero-content */
+}
+
+.hero-content {
+  position: relative; /* Ensure content is above the ::before pseudo-element */
+  z-index: 1;
+}
+
+/* Hero Section Title Styles */
+.hero-section h1 {
+  font-size: clamp(3rem, 8vw, 6rem); /* Reduced from 12vw, 9rem */
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  color: var(--primary-orange);
+  text-shadow: 
+    0 0 20px rgba(255, 107, 0, 0.5), /* Simplified initial shadow */
+    0 0 30px rgba(255, 107, 0, 0.2);
+  transition: var(--transition-smooth);
+  position: relative; 
+  display: inline-block; 
+  cursor: pointer;
+  letter-spacing: -3px;
+  font-family: 'Unbounded', sans-serif;
+  text-transform: uppercase;
+  filter: drop-shadow(0 3px 10px rgba(255, 107, 0, 0.3)); /* Simplified drop shadow */
+}
+
+/* New Hover Effect for H1 */
+.hero-section h1:hover {
+  color: var(--primary-blue);
+  text-shadow: 
+    0 0 25px rgba(0, 191, 255, 0.7), /* Brighter blue shadow on hover */
+    0 0 40px rgba(0, 191, 255, 0.4);
+  transform: translateY(-5px) scale(1.02); /* Subtle lift and scale */
+  filter: drop-shadow(0 8px 20px rgba(0, 191, 255, 0.4)); /* Adjusted drop shadow on hover */
+}
+
+/* Sophisticated backdrop effect with more layers - Simplified Hover */
+.hero-section h1::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  left: -100px;
+  right: -100px;
+  bottom: -60px;
+  background: 
+    radial-gradient(ellipse at center, 
+      rgba(255, 105, 180, 0) 0%, 
+      rgba(255, 105, 180, 0.1) 30%, /* Softer gradient */
+      rgba(0, 191, 255, 0.05) 70%,
+      transparent 100%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Smoother transition */
+  z-index: -1;
+  filter: blur(30px); /* Increased blur for softer backdrop */
+}
+
+.hero-section h1:hover::before {
+  opacity: 0.7; /* More subtle opacity */
+  transform: scale(1.3); /* Simpler scale, no rotation */
+  /* Removed animation: backdrop-pulse to keep it static on hover or use a very slow pulse if desired */
+}
+
+/* REMOVE or COMMENT OUT the existing ::after (drip) and .splash-effect styles */
+/*
+.hero-section h1::after {
+  content: "";
+  position: absolute;
+  bottom: -80px;
+  left: 10%;
+  width: 80%;
+  height: 60px;
+  background: linear-gradient(to bottom, 
+    rgba(255, 107, 0, 0.8) 0%, 
+    rgba(255, 107, 0, 0.4) 20%, 
+    rgba(255, 107, 0, 0.2) 50%,
+    rgba(255, 107, 0, 0.1) 80%,
+    transparent 100%);
+  border-radius: 80px 80px 40px 40px;
+  filter: blur(4px);
+  z-index: -1;
+  transition: var(--transition-smooth);
+  animation: enhanced-drip 5s ease-in-out infinite alternate;
+  box-shadow: 0 0 30px rgba(255, 107, 0, 0.4);
+}
+
+.hero-section h1:hover::after {
+  background: linear-gradient(to bottom, 
+    rgba(0, 191, 255, 0.9) 0%, 
+    rgba(255, 105, 180, 0.7) 30%, 
+    rgba(0, 191, 255, 0.4) 60%,
+    rgba(255, 105, 180, 0.2) 80%,
+    transparent 100%);
+  width: 90%;
+  left: 5%;
+  height: 80px;
+  box-shadow: 
+    0 0 40px rgba(0, 191, 255, 0.6),
+    0 0 60px rgba(255, 105, 180, 0.4);
+}
+
+.hero-section h1 .splash-effect {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(5px);
+  z-index: -1;
+  transition: var(--transition-smooth);
+  opacity: 0.8;
+}
+
+.hero-section h1 .splash-1 {
+  top: -50px;
+  left: -100px;
+  width: 70px;
+  height: 70px;
+  background: radial-gradient(circle, 
+    rgba(255, 107, 0, 0.6) 0%, 
+    rgba(255, 107, 0, 0.3) 40%,
+    rgba(255, 107, 0, 0.1) 70%,
+    transparent 80%);
+  animation: splash-float-1 6s ease-in-out infinite alternate;
+  box-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+}
+
+.hero-section h1 .splash-2 {
+  top: 30px;
+  right: -110px;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, 
+    rgba(255, 107, 0, 0.5) 0%, 
+    rgba(255, 107, 0, 0.2) 50%,
+    rgba(255, 107, 0, 0.1) 70%,
+    transparent 80%);
+  animation: splash-float-2 5s ease-in-out infinite alternate-reverse;
+  box-shadow: 0 0 15px rgba(255, 107, 0, 0.25);
+}
+
+.hero-section h1 .splash-3 {
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 45px;
+  background: radial-gradient(ellipse, 
+    rgba(255, 107, 0, 0.6) 0%, 
+    rgba(255, 107, 0, 0.3) 50%,
+    rgba(255, 107, 0, 0.1) 80%,
+    transparent 90%);
+  animation: splash-float-3 6.5s ease-in-out infinite alternate;
+  box-shadow: 0 0 25px rgba(255, 107, 0, 0.35);
+}
+
+.hero-section h1:hover .splash-1 {
+  background: radial-gradient(circle, 
+    rgba(0, 191, 255, 0.8) 0%, 
+    rgba(255, 105, 180, 0.6) 30%,
+    rgba(0, 191, 255, 0.4) 60%,
+    rgba(138, 43, 226, 0.2) 80%,
+    transparent 90%);
+  transform: scale(1.6) rotate(35deg);
+  box-shadow: 
+    0 0 30px rgba(0, 191, 255, 0.5),
+    0 0 50px rgba(255, 105, 180, 0.3);
+}
+
+.hero-section h1:hover .splash-2 {
+  background: radial-gradient(circle, 
+    rgba(255, 105, 180, 0.8) 0%, 
+    rgba(0, 191, 255, 0.5) 40%,
+    rgba(255, 105, 180, 0.3) 70%,
+    transparent 85%);
+  transform: scale(1.5) rotate(-25deg);
+  box-shadow: 
+    0 0 25px rgba(255, 105, 180, 0.5),
+    0 0 40px rgba(0, 191, 255, 0.3);
+}
+
+.hero-section h1:hover .splash-3 {
+  background: radial-gradient(ellipse, 
+    rgba(0, 191, 255, 0.7) 0%, 
+    rgba(255, 105, 180, 0.5) 30%,
+    rgba(0, 191, 255, 0.3) 60%,
+    rgba(138, 43, 226, 0.2) 80%,
+    transparent 90%);
+  transform: translateX(-50%) scale(1.8);
+  box-shadow: 
+    0 0 35px rgba(0, 191, 255, 0.5),
+    0 0 55px rgba(255, 105, 180, 0.4);
+}
+*/
+
+/* Refined hero subtitle with better hierarchy */
+.hero-section .subtitle {
+  color: var(--primary-blue);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem); /* Reduced from 4vw, 2.8rem */
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-shadow: 
+    0 0 25px rgba(255, 105, 180, 0.6),
+    0 0 40px rgba(0, 191, 255, 0.3);
+  opacity: 0.95;
+  letter-spacing: 1px;
+}
+
+.hero-section p {
+  color: var(--text-light);
+  font-size: clamp(1.2rem, 2.8vw, 1.6rem);
+  font-weight: 400;
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+  opacity: 0.9;
+}
+
+/* Enhanced content sections with dramatic separation */
+.content-section {
+  padding: var(--section-spacing) 0;
+  position: relative;
+  border-radius: 0;
+  margin: 2rem 0;
+  padding-top: 6rem; /* Increased top padding */
+  padding-bottom: 6rem; /* Increased bottom padding */
+}
+
+.content-section::before {
+  content: "";
+  position: absolute;
+  top: -2rem;
+  left: 0;
+  right: 0;
+  height: 4rem;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(0, 191, 255, 0.03) 50%,
+    transparent 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.section-container {
+  background: var(--glass-bg);
+  backdrop-filter: blur(25px);
+  border-radius: var(--border-radius);
+  padding: 3rem; /* Reduced from 5rem */
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 1px solid var(--glass-border);
+  box-shadow: 
+    0 15px 50px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 80px rgba(0, 191, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.section-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 25px 70px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 0 100px rgba(0, 191, 255, 0.15);
+}
+
+.section-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--primary-orange), 
+    var(--primary-blue), 
+    var(--primary-pink), 
+    transparent);
+  opacity: 0.8;
+}
+
+.section-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+    rgba(0, 191, 255, 0.05) 0%, 
+    transparent 40%);
+  pointer-events: none;
+  opacity: 0;
+  transition: var(--transition-quick);
+}
+
+.section-container:hover::after {
+  opacity: 1;
+}
+
+/* Enhanced whitepaper section with better visual hierarchy */
+.whitepaper-section {
+  background: 
+    linear-gradient(180deg, 
+      var(--mid-bg) 0%, 
+      rgba(17, 17, 17, 0.98) 30%,
+      rgba(26, 26, 26, 0.95) 70%,
+      var(--dark-bg) 100%),
+    radial-gradient(circle at 70% 30%, rgba(255, 105, 180, 0.08) 0%, transparent 50%);
+  padding: var(--section-spacing) 0;
+  position: relative;
+}
+
+.whitepaper-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(0,191,255,0.1)"/></pattern></defs><rect width="200" height="200" fill="url(%23dots)"/>');
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.whitepaper-toc {
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(20px);
+  border-radius: var(--border-radius);
+  padding: 4rem;
+  margin-bottom: 5rem;
+  border: 2px solid var(--glass-border);
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.3),
+    0 0 60px rgba(0, 191, 255, 0.1);
+  position: relative;
+}
+
+.whitepaper-toc::before {
+  content: "📋";
+  position: absolute;
+  top: -15px;
+  left: 30px;
+  font-size: 2rem;
+  background: var(--dark-bg);
+  padding: 0 1rem;
+}
+
+.whitepaper-toc h3 {
+  color: var(--primary-blue);
+  margin-bottom: 3rem;
+  text-align: center;
+  position: relative;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+}
+
+.whitepaper-toc-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.whitepaper-toc-list li {
+  position: relative;
+}
+
+.whitepaper-toc-list li::before {
+  content: "▸";
+  color: var(--primary-pink);
+  margin-right: 0.8rem;
+  font-weight: bold;
+  transition: var(--transition-quick);
+}
+
+.whitepaper-toc-list li:hover::before {
+  color: var(--primary-orange);
+  transform: scale(1.2);
+}
+
+.whitepaper-toc-list li a {
+  color: var(--primary-blue);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: var(--transition-bounce);
+  padding: 1rem 1.5rem;
+  display: block;
+  border-radius: var(--border-radius-small);
+  border-left: 4px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.whitepaper-toc-list li a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(0, 191, 255, 0.1), 
+    rgba(255, 105, 180, 0.1));
+  transition: var(--transition-quick);
+}
+
+.whitepaper-toc-list li a:hover::before {
+  width: 100%;
+}
+
+.whitepaper-toc-list li a:hover {
+  color: var(--text-white);
+  border-left-color: var(--primary-pink);
+  text-shadow: 0 0 15px var(--primary-blue);
+  transform: translateX(12px) scale(1.02);
+  background: rgba(0, 191, 255, 0.05);
+}
+
+/* Enhanced whitepaper content with better readability */
+.wp-content {
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(15px);
+  border-radius: var(--border-radius);
+  padding: 5rem;
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  position: relative;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.wp-content h3 {
+  color: var(--primary-blue);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  margin: 4rem 0 2.5rem 0;
+  padding-bottom: 1.5rem;
+  border-bottom: 3px solid;
+  border-image: linear-gradient(90deg, var(--primary-pink), var(--primary-blue)) 1;
+  position: relative;
+}
+
+.wp-content h3:first-child {
+  margin-top: 0;
+}
+
+.wp-content h3::before {
+  content: "●";
+  color: var(--primary-orange);
+  margin-right: 1rem;
+  font-size: 0.8em;
+  animation: pulse-dot 2s infinite;
+}
+
+.wp-content h4 {
+  color: var(--primary-pink);
+  font-size: clamp(1.4rem, 2.8vw, 1.8rem);
+  margin: 3rem 0 1.5rem 0;
+  position: relative;
+}
+
+.wp-content h4::before {
+  content: "▸";
+  color: var(--primary-blue);
+  margin-right: 0.5rem;
+  font-size: 0.9em;
+}
+
+.wp-content p {
+  font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  color: var(--text-light);
+}
+
+.wp-content ol, .wp-content ul {
+  padding-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+.wp-content li {
+  margin-bottom: 1rem;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+.wp-content ol li::marker {
+  color: var(--primary-blue);
+  font-weight: bold;
+}
+
+.wp-content ul li::marker {
+  color: var(--primary-pink);
+}
+
+/* Enhanced special elements with better effects */
+.token-number {
+  color: var(--primary-pink);
+  font-weight: 800;
+  text-shadow: 
+    0 0 20px var(--primary-pink),
+    0 0 40px rgba(255, 105, 180, 0.5);
+  position: relative;
+  display: inline-block;
+  animation: token-glow 3s ease-in-out infinite alternate;
+}
+
+.number-13 {
+  color: var(--primary-pink);
+  font-weight: 900;
+  font-size: 1.4em;
+  animation: enhanced-glow 4s ease-in-out infinite alternate;
+  position: relative;
+  display: inline-block;
+}
+
+.number-13::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  background: radial-gradient(circle, 
+    rgba(255, 105, 180, 0.3) 0%, 
+    rgba(255, 105, 180, 0.1) 50%,
+    transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: number-pulse 4s ease-in-out infinite alternate;
+}
+
+/* Enhanced Tokenomics Section with Visual Hierarchy */
+.tokenomics-section {
+  background: 
+    linear-gradient(135deg, 
+      rgba(0, 191, 255, 0.08) 0%, 
+      rgba(255, 105, 180, 0.06) 50%,
+      rgba(255, 107, 0, 0.04) 100%),
+    radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.06) 0%, transparent 40%);
+  position: relative;
+  overflow: hidden;
+}
+
+.tokenomics-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><defs><pattern id="circuit" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M10 10h40v40h-40z M20 0v60 M40 0v60 M0 20h60 M0 40h60" fill="none" stroke="rgba(0,191,255,0.08)" stroke-width="1"/></pattern></defs><rect width="300" height="300" fill="url(%23circuit)"/>');
+  z-index: -1;
+  opacity: 0.3;
+  animation: circuit-pulse 12s ease-in-out infinite alternate;
+}
+
+/* Add missing circuit-pulse animation */
+@keyframes circuit-pulse {
+  0% { 
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  100% { 
+    opacity: 0.4;
+    transform: scale(1.05);
+  }
+}
+
+/* Enhanced Tokenomics Grid with Better Visual Hierarchy */
+.tokenomics-overview {
+  margin-bottom: var(--section-spacing);
+}
+
+.tokenomics-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
+  margin: 4rem 0 6rem 0;
+}
+
+.tokenomics-hero-card {
+  background: 
+    linear-gradient(135deg, 
+      rgba(0, 191, 255, 0.12) 0%, 
+      rgba(255, 105, 180, 0.08) 100%);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(0, 191, 255, 0.3);
+  border-radius: var(--border-radius);
+  padding: 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  box-shadow: 
+    0 15px 50px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.tokenomics-hero-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, 
+    var(--primary-orange), 
+    var(--primary-blue), 
+    var(--primary-pink));
+  animation: gradient-flow 3s ease-in-out infinite alternate;
+}
+
+.tokenomics-hero-card::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, 
+    rgba(0, 191, 255, 0.05) 0%, 
+    transparent 70%);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: var(--transition-smooth);
+  z-index: -1;
+}
+
+.tokenomics-hero-card:hover::after {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.tokenomics-hero-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--primary-pink);
+  box-shadow: 
+    0 25px 70px rgba(0, 0, 0, 0.4),
+    0 0 80px rgba(255, 105, 180, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.tokenomics-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  display: block;
+  filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.5));
+}
+
+.tokenomics-hero-card h3 {
+  color: var(--primary-blue);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.tokenomics-hero-card h3::before {
+  display: none; /* Remove default arrow */
+}
+
+.mega-number {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, 
+    var(--primary-pink), 
+    var(--primary-blue), 
+    var(--primary-orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 1rem 0;
+  display: block;
+  animation: mega-glow 4s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 30px rgba(255, 105, 180, 0.4));
+}
+
+.tokenomics-subtitle {
+  color: var(--text-light);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+/* Enhanced Distribution Visualization */
+.distribution-section {
+  margin: 6rem 0;
+}
+
+.distribution-visual {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 4rem 0;
+}
+
+.distribution-item {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(15px);
+  border-radius: var(--border-radius);
+  padding: 2.5rem;
+  border: 1px solid rgba(0, 191, 255, 0.2);
+  position: relative;
+  transition: var(--transition-smooth);
+  overflow: hidden;
+}
+
+.distribution-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  background: var(--accent-color, var(--primary-blue));
+  transition: var(--transition-quick);
+}
+
+.distribution-item:hover::before {
+  width: 12px;
+  box-shadow: 0 0 20px var(--accent-color, var(--primary-blue));
+}
+
+.distribution-item:hover {
+  transform: translateX(8px) scale(1.02);
+  background: rgba(0, 0, 0, 0.8);
+  border-color: var(--accent-color, var(--primary-blue));
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(0, 191, 255, 0.2);
+}
+
+.distribution-item:nth-child(1) { --accent-color: var(--primary-orange); }
+.distribution-item:nth-child(2) { --accent-color: var(--primary-pink); }
+.distribution-item:nth-child(3) { --accent-color: var(--primary-blue); }
+.distribution-item:nth-child(4) { --accent-color: var(--accent-purple); }
+.distribution-item:nth-child(5) { --accent-color: #00ff9f; }
+
+.distribution-percentage {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  color: var(--accent-color, var(--primary-blue));
+  margin-bottom: 0.5rem;
+  display: block;
+  text-shadow: 0 0 20px var(--accent-color, var(--primary-blue));
+}
+
+.distribution-title {
+  color: var(--text-white);
+  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.distribution-amount {
+  color: var(--accent-color, var(--primary-blue));
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+/* Enhanced Staking Rewards Section */
+.staking-section {
+  background: 
+    linear-gradient(135deg, 
+      rgba(255, 105, 180, 0.08) 0%, 
+      rgba(138, 43, 226, 0.06) 100%);
+  border-radius: var(--border-radius);
+  padding: 4rem;
+  margin: 6rem 0;
+  border: 2px solid rgba(255, 105, 180, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.staking-section::before {
+  content: "💎";
+  position: absolute;
+  top: -20px;
+  left: 40px;
+  font-size: 2.5rem;
+  background: var(--dark-bg);
+  padding: 0 1.5rem;
+  border-radius: 50%;
+  border: 2px solid var(--primary-pink);
+}
+
+.staking-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.staking-tier {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 105, 180, 0.3);
+  border-radius: var(--border-radius-small);
+  padding: 2rem;
+  text-align: center;
+  transition: var(--transition-bounce);
+  position: relative;
+  overflow: hidden;
+}
+
+.staking-tier::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 105, 180, 0.1), 
+    transparent);
+  transition: var(--transition-quick);
+}
+
+.staking-tier:hover::after {
+  left: 100%;
+}
+
+.staking-tier:hover {
+  transform: translateY(-5px) scale(1.05);
+  border-color: var(--primary-pink);
+  box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
+}
+
+.staking-apy {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 900;
+  color: var(--primary-pink);
+  margin: 1rem 0;
+  text-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+}
+
+.staking-type {
+  color: var(--primary-blue);
+  font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Enhanced Roadmap Section with Timeline Visualization */
+.roadmap-section {
+  background: 
+    radial-gradient(ellipse at top, rgba(0, 191, 255, 0.06) 0%, transparent 50%),
+    linear-gradient(135deg, 
+      rgba(0, 0, 0, 0.9) 0%, 
+      rgba(17, 17, 17, 0.95) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.roadmap-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><defs><pattern id="roadmap-grid" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.5" fill="rgba(0,191,255,0.1)"/><path d="M0 20h40M20 0v40" stroke="rgba(255,105,180,0.05)" stroke-width="1"/></pattern></defs><rect width="400" height="400" fill="url(%23roadmap-grid)"/></svg>');
+  z-index: -1;
+  opacity: 0.4;
+  animation: roadmap-flow 15s linear infinite;
+}
+
+/* Roadmap Timeline Container */
+.roadmap-timeline {
+  position: relative;
+  margin: 6rem 0; /* Desktop margin */
+  padding: 0 2rem; /* Desktop padding */
+}
+
+.roadmap-timeline::before {
+  content: "";
+  position: absolute;
+  left: 50%; /* Will be overridden or irrelevant if icon is not centered on it */
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, 
+    var(--primary-orange) 0%,
+    var(--primary-blue) 33%,
+    var(--primary-pink) 66%,
+    var(--accent-purple) 100%);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+  animation: timeline-glow 4s ease-in-out infinite alternate;
+  display: none; /* Hide the central timeline line */
+}
+
+/* Enhanced Roadmap Phases - Desktop: Stacked Layout */
+.roadmap-phase-enhanced {
+  position: relative;
+  margin: 3rem 0; /* Slightly reduced space between full-width phases */
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 1.5rem; 
+}
+
+/* Hide spacer divs if they exist from a previous 3-column structure */
+.roadmap-phase-enhanced > div:not(.roadmap-phase-content):not(.roadmap-phase-icon) {
+  display: none !important;
+}
+
+.roadmap-phase-content {
+  background: 
+    linear-gradient(135deg, 
+      rgba(0, 191, 255, 0.08) 0%, /* Slightly more subtle background */
+      rgba(255, 105, 180, 0.06) 100%);
+  backdrop-filter: blur(15px); /* Slightly reduced blur */
+  border: 1px solid rgba(0, 191, 255, 0.25); /* Slightly softer border */
+  border-radius: var(--border-radius);
+  padding: 2rem 2.5rem; /* REDUCED PADDING for a more compact container */
+  position: relative;
+  overflow: hidden; 
+  transition: var(--transition-smooth);
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.25), /* Softer shadow */
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  width: 100%; 
+  max-width: 800px; /* Adjusted max-width for better content flow */
+  margin-left: auto; 
+  margin-right: auto; 
+}
+
+.roadmap-phase-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px; /* Thinner accent line */
+  background: var(--phase-color, linear-gradient(90deg, var(--primary-orange), var(--primary-blue)));
+  animation: phase-shimmer 3s ease-in-out infinite alternate;
+}
+
+.roadmap-phase-content:hover {
+  transform: translateY(-6px) scale(1.01); /* More subtle hover */
+  border-color: var(--primary-pink);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.35),
+    0 0 50px rgba(255, 105, 180, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* Phase Color Variations (These should still work) */
+.roadmap-phase-enhanced:nth-child(1) .roadmap-phase-content {
+  --phase-color: linear-gradient(90deg, var(--primary-orange), #ff8533);
+}
+.roadmap-phase-enhanced:nth-child(2) .roadmap-phase-content {
+  --phase-color: linear-gradient(90deg, var(--primary-blue), #33b8ff);
+}
+.roadmap-phase-enhanced:nth-child(3) .roadmap-phase-content {
+  --phase-color: linear-gradient(90deg, var(--primary-pink), #ff85c1);
+}
+/* Add more for other phases if needed */
+.roadmap-phase-enhanced:nth-child(4) .roadmap-phase-content {
+  --phase-color: linear-gradient(90deg, var(--accent-purple), #a855f7);
+}
+
+
+/* Roadmap Phase Icons - Will be centered above content on desktop */
+.roadmap-phase-icon {
+  width: 70px; /* Slightly smaller icon */
+  height: 70px; /* Slightly smaller icon */
+  background: 
+    linear-gradient(135deg, 
+      var(--primary-orange) 0%, 
+      var(--primary-pink) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem; /* Adjusted icon font size */
+  color: var(--text-white);
+  position: relative;
+  box-shadow: 
+    0 0 25px rgba(255, 105, 180, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.15);
+  transition: var(--transition-bounce);
+  border: 2px solid var(--dark-bg);
+}
+
+/* Roadmap Phase Icons - Hover Effects */
+.roadmap-phase-icon:hover {
+  transform: scale(1.15) rotate(10deg);
+  box-shadow: 
+    0 0 50px rgba(255, 105, 180, 0.8),
+    0 15px 40px rgba(0, 0, 0, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Enhanced Phase Titles */
+.roadmap-phase-enhanced h3 {
+  color: var(--primary-orange); 
+  font-size: clamp(1.5rem, 3vw, 2rem); /* Slightly adjusted title size */
+  margin-bottom: 1.5rem; /* Adjusted margin */
+  position: relative;
+  font-weight: 700;
+  text-align: center; /* Center title within the content block */
+}
+
+.roadmap-phase-enhanced h3::before {
+  content: "▶";
+  color: var(--primary-pink);
+  margin-right: 0.8rem; /* Adjusted margin */
+  font-size: 0.75em; /* Adjusted size */
+  animation: phase-pulse 2s infinite;
+}
+
+/* Enhanced Milestone Lists - More compact and integrated */
+.roadmap-milestones {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0; /* Adjusted margin */
+}
+
+.roadmap-milestones li {
+  background: transparent; /* REMOVED background for less "boxy" look */
+  border-radius: var(--border-radius-small);
+  padding: 0.75rem 0.5rem; /* REDUCED padding */
+  margin: 0.5rem 0; /* REDUCED margin */
+  border-left: 3px solid var(--primary-blue); /* Thinner border */
+  transition: var(--transition-quick); /* Quicker transition */
+  position: relative;
+  /* overflow: hidden; */ /* Not strictly needed if background is transparent */
+}
+
+.roadmap-milestones li::before {
+  content: "✓";
+  position: absolute;
+  left: -12px; /* Position relative to the new padding/border */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px; /* Smaller checkmark */
+  height: 20px; /* Smaller checkmark */
+  background: var(--primary-blue);
+  color: var(--text-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem; /* Smaller font in checkmark */
+  font-weight: bold;
+  opacity: 0;
+  transition: var(--transition-quick);
+  /* box-shadow: 0 0 8px var(--primary-blue); */ /* Optional: subtle glow */
+}
+
+.roadmap-milestones li:hover::before {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.05);
+  left: -10px; /* Slight shift on hover */
+}
+
+.roadmap-milestones li:hover {
+  background: rgba(0, 191, 255, 0.05); /* Very subtle background on hover */
+  border-left-color: var(--primary-pink);
+  transform: translateX(5px); /* More subtle shift */
+}
+
+.roadmap-milestones li strong {
+  color: var(--primary-blue);
+  font-weight: 600; /* Slightly less heavy */
+}
+
+/* Enhanced Mobile Responsiveness for Roadmap */
+@media (max-width: 768px) {
+  .roadmap-timeline {
+    padding: 0 1rem; 
+    margin: 3rem 0; /* Adjusted margin */
+  }
+
+  .roadmap-phase-enhanced {
+    gap: 1rem; 
+    margin-bottom: 2rem; 
+  }
+
+  .roadmap-phase-icon {
+    width: 50px !important;        /* Mobile icon size */
+    height: 50px !important;       /* Mobile icon size */
+    font-size: 1.3rem !important;  /* Mobile icon font size */
+  }
+
+  .roadmap-phase-content {
+    padding: 1.5rem !important;    
+  }
+
+  .roadmap-phase-enhanced h3 {
+    font-size: clamp(1.3rem, 2.8vw, 1.6rem); 
+    margin-bottom: 1rem;
+  }
+
+  .roadmap-milestones li {
+    padding: 0.6rem 0.5rem; 
+    margin-bottom: 0.5rem;
+    border-left-width: 2px; /* Even thinner border for mobile */
+  }
+
+  .roadmap-milestones li:hover {
+    padding-left: 0.5rem; 
+    transform: translateX(0); 
+  }
+
+  .roadmap-milestones li::before { 
+    left: -10px; 
+    width: 18px;
+    height: 18px;
+    font-size: 0.6rem;
+  }
+  .roadmap-milestones li:hover::before {
+    left: -8px;
+  }
+}
+
+/* Responsive adjustments for token chart */
+@media (max-width: 768px) {
+  .token-chart-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .donut-chart {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+/* Tokenomics Chart Styles */
+.token-chart-container {
+  display: grid;
+  grid-template-columns: 1fr; /* Single column layout for mobile-first */
+  gap: 2rem; /* Reduced gap for mobile, will be overridden for desktop */
+  align-items: center;
+  margin-top: 3rem;
+  padding: 1.5rem; /* Adjusted padding */
+  background: rgba(var(--rgb-dark), 0.3); 
+  border-radius: var(--border-radius-large);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(var(--rgb-primary-blue), 0.2);
+}
+
+.donut-chart {
+  position: relative;
+  width: 280px; /* Slightly adjusted for mobile */
+  height: 280px; /* Slightly adjusted for mobile */
+  margin: 0 auto; 
+}
+
+.chart-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); 
+}
+
+.chart-segment {
+  cursor: pointer; 
+}
+
+.chart-segment:hover {
+  filter: brightness(1.2); 
+}
+
+.chart-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 70%; /* Ensure center text has room and wraps if needed */
+}
+
+.chart-total {
+  display: block;
+  font-size: clamp(1.4rem, 3.5vw, 2rem); /* Adjusted clamp for better fit */
+  font-weight: 900;
+  color: var(--primary-blue); 
+  text-shadow: 0 0 10px var(--primary-blue);
+  line-height: 1.2; /* Added line-height */
+}
+
+.chart-label {
+  display: block;
+  font-size: clamp(0.75rem, 1.8vw, 0.9rem); /* Adjusted clamp for better fit */
+  color: var(--text-light);
+  margin-top: 0.3rem; /* Reduced margin */
+  line-height: 1.3; /* Added line-height */
+}
+
+.chart-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Adjusted gap */
+  padding: 1rem; /* Adjusted padding */
+  background: rgba(var(--rgb-dark), 0.2);
+  border-radius: var(--border-radius-medium);
+}
+
+.chart-legend h3 {
+  font-size: clamp(1.1rem, 2.8vw, 1.4rem); /* Adjusted clamp */
+  color: var(--text-white);
+  margin-bottom: 0.75rem; /* Adjusted margin */
+  text-align: center;
+  font-weight: 700;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem; /* Adjusted gap */
+  padding: 0.4rem; /* Adjusted padding */
+  border-radius: var(--border-radius-small);
+  transition: background-color 0.3s ease;
+}
+
+.legend-item:hover {
+  background-color: rgba(var(--rgb-primary-blue), 0.1);
+}
+
+.legend-color {
+  width: 18px; /* Slightly smaller swatch */
+  height: 18px; /* Slightly smaller swatch */
+  border-radius: 50%; 
+  border: 2px solid rgba(var(--rgb-white), 0.5); 
+  flex-shrink: 0; /* Prevent swatch from shrinking */
+}
+
+.legend-text {
+  flex-grow: 1;
+  font-size: clamp(0.85rem, 2vw, 0.95rem); /* Adjusted clamp */
+  color: var(--text-light);
+  line-height: 1.4; /* Added line-height */
+}
+
+.legend-percentage {
+  font-size: clamp(0.85rem, 2vw, 0.95rem); /* Adjusted clamp */
+  font-weight: 700;
+  color: var(--text-white);
+  margin-left: 0.5rem; /* Add some space before percentage */
+}
+
+/* Responsive adjustments for the chart and legend */
+@media (min-width: 768px) {
+  .token-chart-container {
+    grid-template-columns: auto 1fr; 
+    align-items: center; /* Vertically center chart and legend */
+    padding: 2.5rem; /* Increased padding for desktop */
+    gap: 2.5rem; /* Increased gap for desktop */
+  }
+
+  .donut-chart {
+    width: 340px; /* Increased size for desktop */
+    height: 340px; /* Increased size for desktop */
+  }
+
+  .chart-legend {
+    align-self: center; /* Center legend vertically if it's shorter than chart */
+    padding: 2rem; /* Increased padding */
+    gap: 1rem; /* Increased gap */
+  }
+
+  .chart-legend h3 {
+    text-align: left;
+  }
+}
+
+/* Tokenomics Summary Section (if you added it) */
+.tokenomics-summary {
+  margin-top: 4rem;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(var(--rgb-primary-blue), 0.2);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.summary-item {
+  background: rgba(var(--rgb-dark), 0.3);
+  padding: 2rem;
+  border-radius: var(--border-radius-medium);
+  border: 1px solid rgba(var(--rgb-primary-blue), 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.summary-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.summary-item h3 {
+  color: var(--primary-pink); /* Or another highlight color */
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  margin-bottom: 1rem;
+}
+
+.summary-item p {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+/* REMOVE THIS LINE */
+
+/* ... rest of your App.css ... */
+
+/* Logo Drip and Splash Effects */
+.liquid-logo {
+  /* ... existing styles ... */
+  position: relative; /* Ensure drips are positioned relative to the logo text */
+}
+
+/* Remove or replace old @keyframes enhanced-drip */
+/* @keyframes enhanced-drip { ... } */
+
+@keyframes liquidDripFall {
+  0% {
+    transform: translateY(-100%) scaleY(0.3) scaleX(0.5);
+    opacity: 0;
+  }
+  30% { /* Drip appears and starts stretching */
+    transform: translateY(-10%) scaleY(0.8) scaleX(0.7); /* Less initial drop */
+    opacity: 1;
+  }
+  70% { /* Drip elongates as it falls */
+    transform: translateY(90%) scaleY(1.3) scaleX(0.8); /* More stretch */
+    opacity: 1;
+  }
+  100% { /* Drip hits and disappears (or forms a splash) */
+    transform: translateY(160%) scaleY(0.15) scaleX(1.1); /* Flatter impact */
+    opacity: 0;
+  }
+}
+
+.liquid-drip {
+  position: absolute;
+  background: var(--accent-purple); 
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; /* Slightly adjusted teardrop */
+  transform-origin: top center;
+  opacity: 0; 
+  animation-timing-function: cubic-bezier(0.3, 0.2, 0.1, 1); /* Smoother, more pronounced ease-out */
+  animation-fill-mode: forwards; 
+  box-shadow: 0px 1px 3px rgba(138, 43, 226, 0.4); /* Softer shadow matching accent purple */
+  pointer-events: none; /* So drips don't interfere with hovering the H1 */
+}
+
+/* Individual drip styling - Varied sizes and heights */
+/* Fine-tune 'top' and 'left' to align with "BHABIT" letters */
+.liquid-drip.drip-1 { width: 5px; height: 12px; top: 25%; left: 10%; } /* Small, high on 'B' */
+.liquid-drip.drip-2 { width: 9px; height: 22px; top: 45%; left: 28%; } /* Larger, mid on 'H' */
+.liquid-drip.drip-3 { width: 6px; height: 16px; top: 20%; left: 48%; } /* Medium, highest on 'A' */
+.liquid-drip.drip-4 { width: 10px; height: 25px; top: 55%; left: 68%; } /* Largest, lower on 'B'/'I' */
+.liquid-drip.drip-5 { width: 7px; height: 18px; top: 35%; left: 88%; } /* Medium, mid-high on 'T' */
+
+/* Trigger drip animations on H1 hover with varied durations/delays */
+.hero-section h1:hover .liquid-drip {
+  animation-name: liquidDripFall; 
+}
+.hero-section h1:hover .liquid-drip.drip-1 { animation-duration: 1.7s; animation-delay: 0.05s; }
+.hero-section h1:hover .liquid-drip.drip-2 { animation-duration: 2.0s; animation-delay: 0.25s; }
+.hero-section h1:hover .liquid-drip.drip-3 { animation-duration: 1.6s; animation-delay: 0.1s; }
+.hero-section h1:hover .liquid-drip.drip-4 { animation-duration: 2.2s; animation-delay: 0.15s; }
+.hero-section h1:hover .liquid-drip.drip-5 { animation-duration: 1.8s; animation-delay: 0.3s; }
+
+
+/* Keyframes for splash effect */
+@keyframes liquidSplashBurst {
+  0% {
+    transform: scale(0.5) translateY(0px); /* Start smaller, slightly above */
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) translateY(-5px); /* Burst up and out */
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.6) translateY(5px); /* Fade out larger and slightly down */
+    opacity: 0;
+  }
+}
+
+.splash-effect {
+  position: absolute;
+  background: var(--accent-purple); 
+  border-radius: 40% 60% 45% 55% / 50% 50% 50% 50%; /* More irregular splash shape */
+  transform: scale(0);
+  opacity: 0; /* Start invisible */
+  animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1); /* Quick burst, slow fade */
+  animation-fill-mode: forwards; /* Stay at the end state (opacity 0) */
+  pointer-events: none; /* So splashes don't interfere with hovering the H1 */
+}
+
+/* Individual splash styling - Adjust sizes if needed */
+.splash-effect.splash-1 { width: 20px; height: 8px; bottom: -2px; left: 10%; }
+.splash-effect.splash-2 { width: 30px; height: 12px; bottom: -5px; left: 28%; }
+.splash-effect.splash-3 { width: 22px; height: 9px; bottom: 0px; left: 48%; }
+.splash-effect.splash-4 { width: 35px; height: 14px; bottom: -8px; left: 68%; }
+.splash-effect.splash-5 { width: 26px; height: 10px; bottom: -3px; left: 88%; }
+
+/* Trigger splash animations on H1 hover */
+.hero-section h1:hover .splash-effect {
+  animation-name: liquidSplashBurst; 
+  animation-duration: 0.7s; /* Slightly longer splash */
+}
+/* Delays for splashes - adjust based on new drip timings */
+.hero-section h1:hover .splash-effect.splash-1 { animation-delay: calc(0.05s + 1.7s - 0.4s); } 
+.hero-section h1:hover .splash-effect.splash-2 { animation-delay: calc(0.25s + 2.0s - 0.4s); }
+.hero-section h1:hover .splash-effect.splash-3 { animation-delay: calc(0.1s + 1.6s - 0.4s); }
+.hero-section h1:hover .splash-effect.splash-4 { animation-delay: calc(0.15s + 2.2s - 0.4s); }
+.hero-section h1:hover .splash-effect.splash-5 { animation-delay: calc(0.3s + 1.8s - 0.4s); }
+
+
+/* REMOVE OR COMMENT OUT THE TEMPORARY DEBUGGING BLOCK if it's still there */
+/*
+.liquid-drip, .splash-effect {
+  opacity: 1 !important; 
+  background-color: rgb(120, 13, 134) !important; 
+  width: 20px !important; 
+  height: 20px !important;
+}
+*/
+
+/* Timeline Line - if you want a visual connector */
+.roadmap-container::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--primary-blue), var(--accent-purple), var(--primary-pink));
+  transform: translateX(-50%);
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--primary-blue);
+  display: none; /* Hide timeline line for single column layout */
+}
+
+.roadmap-phases-container {
+  display: grid; 
+  grid-template-columns: 1fr; /* Force single column layout */
+  gap: 3rem; /* Adjusted gap for single column (row gap) */
+  position: relative; 
+}
+
+.roadmap-phase {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 2.5rem 2rem; 
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 0 15px var(--primary-blue) inset;
+  transition: var(--transition-smooth);
+  position: relative; 
+  /* width: 100%; */ /* Grid item will take full width of the 1fr column by default */
+  /* You might consider adding a max-width here if the text lines become too long, e.g.: */
+  /* max-width: 800px; */
+  /* margin-left: auto; */ /* To center if max-width is used */
+  /* margin-right: auto; */ /* To center if max-width is used */
+}
+
+/* Feature Highlights Section - For Deflationary, Rewards, Staking APY */
+.feature-highlights-section {
+  /* This class can be used on a <section> element wrapping the grid. */
+  /* Add any specific padding or background for the overall section if needed. */
+  /* Example: padding: var(--section-spacing) 0; */
+}
+
+.feature-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Responsive grid */
+  gap: 2.5rem; /* Spacing between feature items */
+  margin-top: 2rem; /* Adjust as needed, space above the grid */
+}
+
+.feature-highlight-item {
+  --item-accent-color: var(--primary-blue); /* Default accent color */
+  background: linear-gradient(140deg, rgba(26, 26, 26, 0.9), rgba(17, 17, 17, 0.95));
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  padding: 2.5rem 2rem;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 0.4s ease;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.feature-highlight-item:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--item-accent-color); 
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 
+              0 0 30px var(--item-accent-color),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Top accent line for each feature item */
+.feature-highlight-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px; 
+  background: var(--item-accent-color);
+  transition: background 0.4s ease;
+}
+
+/* Optional: Icon styling for each feature */
+.feature-highlight-icon {
+  font-size: 2.8rem; 
+  color: var(--item-accent-color);
+  margin-bottom: 1.5rem;
+  display: block;
+  text-align: center; 
+  filter: drop-shadow(0 0 12px var(--item-accent-color));
+  transition: color 0.4s ease, filter 0.4s ease;
+}
+
+.feature-highlight-item h3 { 
+  color: var(--item-accent-color); 
+  font-size: clamp(1.5rem, 3vw, 2rem); 
+  font-weight: 700;
+  margin-bottom: 1rem;
+  position: relative;
+  line-height: 1.3;
+  transition: color 0.4s ease;
+}
+
+/* Remove default h3::before (arrow) from global styles if not wanted for these titles */
+.feature-highlight-item h3::before {
+  display: none; 
+}
+
+.feature-highlight-item p { 
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--text-light);
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+/* --- Individual Item Theming (using a data attribute and CSS variables) --- */
+
+/* Deflationary Model Item */
+.feature-highlight-item[data-feature="deflationary"] {
+  --item-accent-color: var(--primary-orange);
+}
+
+/* Holder Rewards Item */
+.feature-highlight-item[data-feature="rewards"] {
+  --item-accent-color: var(--primary-pink);
+}
+
+/* Staking APY Item */
+.feature-highlight-item[data-feature="staking"] {
+  --item-accent-color: var(--accent-purple); /* Using accent-purple for variety */
+}
