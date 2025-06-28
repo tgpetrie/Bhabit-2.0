@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.4a762b64.css",
-    "main.js": "/static/js/main.a62181f2.js",
+    "main.css": "/static/css/main.db3ed33d.css",
+    "main.js": "/static/js/main.fe97a9cc.js",
+    "static/media/bhabit-coin-bg.png": "/static/media/bhabit-coin-bg.f3a6f8c2f1213b185425.png",
     "index.html": "/index.html",
-    "main.4a762b64.css.map": "/static/css/main.4a762b64.css.map",
-    "main.a62181f2.js.map": "/static/js/main.a62181f2.js.map"
+    "main.db3ed33d.css.map": "/static/css/main.db3ed33d.css.map",
+    "main.fe97a9cc.js.map": "/static/js/main.fe97a9cc.js.map"
   },
   "entrypoints": [
-    "static/css/main.4a762b64.css",
-    "static/js/main.a62181f2.js"
+    "static/css/main.db3ed33d.css",
+    "static/js/main.fe97a9cc.js"
   ]
 }

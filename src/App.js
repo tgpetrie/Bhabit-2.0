@@ -20,34 +20,12 @@ function App() {
 
   return (
     <div className="App">
-      <section id="hero" className="hero-section">
-        <div className="hero-content">
-          <h1>
-            BHABIT
-            {/* Ensure these spans are present and correctly named */}
-            <span className="liquid-drip drip-1"></span>
-            <span className="liquid-drip drip-2"></span>
-            <span className="liquid-drip drip-3"></span>
-            <span className="liquid-drip drip-4"></span>
-            <span className="liquid-drip drip-5"></span>
-            
-            <span className="splash-effect splash-1"></span>
-            <span className="splash-effect splash-2"></span>
-            <span className="splash-effect splash-3"></span>
-            <span className="splash-effect splash-4"></span>
-            <span className="splash-effect splash-5"></span>
-          </h1>
-          <p className="subtitle">Your awesome tagline here.</p>
-          {/* ... other hero content like CTAs ... */}
-        </div>
-      </section>
-
       {/* Navigation */}
       <nav className="nav-container">
         <a href="#home" className="nav-link active">Home</a>
         <a href="#about" className="nav-link">About</a>
         <a href="#whitepaper" className="nav-link">Whitepaper</a>
-        <a href="#tokenomics" className="nav-link">Token Economics</a>
+        <a href="#tokenomics" className="nav-link">Tokenomics</a>
         <a href="#roadmap" className="nav-link">Roadmap</a>
         <a href="#contact" className="nav-link">Contact</a>
       </nav>
@@ -74,6 +52,7 @@ function App() {
               <a href="#tokenomics" className="cta-primary">Explore Token</a>
               <a href="#whitepaper" className="cta-secondary">Read More</a>
             </div>
+            
           </div>
         </div>
       </section>
